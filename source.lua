@@ -201,6 +201,7 @@ function Kavo.CreateLib(kavName, themeList)
     local coverup = Instance.new("Frame")
     local title = Instance.new("TextLabel")
     local close = Instance.new("ImageButton")
+    local minimize = Instance.new("ImageButton")
     local MainSide = Instance.new("Frame")
     local sideCorner = Instance.new("UICorner")
     local coverup_2 = Instance.new("Frame")
@@ -293,7 +294,6 @@ function Kavo.CreateLib(kavName, themeList)
     end)
 
     -- Criar o botão de minimizar
-local minimize = Instance.new("ImageButton")
 minimize.Name = "minimize"
 minimize.Parent = MainHeader
 minimize.BackgroundTransparency = 1
