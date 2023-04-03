@@ -294,31 +294,20 @@ function Kavo.CreateLib(kavName, themeList)
     end)
 
     -- Criar o botão de minimizar
-minimize.Name = "minimize"
-minimize.Parent = MainHeader
-minimize.BackgroundTransparency = 1
-minimize.Position = UDim2.new(0.9, 0, 0, 0)
-minimize.Size = UDim2.new(0, 24, 0, 24)
-minimize.Image = "https://tinypic.host/images/2023/02/14/8666364_orcid_icon.png" -- Substitua isso pelo URL da imagem que você deseja usar para o botão de minimizar
-
--- Adicionar o tratamento de evento ao botão de minimizar
-local isMinimized = false
-minimize.MouseButton1Click:Connect(function()
-    isMinimized = not isMinimized
-    if isMinimized then
-        -- Minimizar a janela
-        game.TweenService:Create(Main, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-            Size = UDim2.new(0, 0, 0, 0),
-            Position = UDim2.new(0.5, 0, 0.5, 0)
-        }):Play()
-    else
-        -- Restaurar a janela
-        game.TweenService:Create(Main, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-            Size = UDim2.new(0.5, 0, 0.5, 0),
-            Position = UDim2.new(0.25, 0, 0.25, 0)
-        }):Play()
-    end
-end)
+    minimize.Name = "minimize"
+    minimize.Parent = MainHeader
+    minimize.BackgroundTransparency = 1.000
+    minimize.Position = UDim2.new(0.899, 0, 0.14, 0)
+    minimize.Size = UDim2.new(0, 21, 0, 21)
+    minimize.ZIndex = 2
+    minimize.Image = "https://tinypic.host/images/2023/02/14/8666364_orcid_icon.png"
+    minimize.MouseButton1Click:Connect(function()
+        if Main.Size == UDim2.new(0, 0, 0, 0) then -- verifica se a janela está minimizada
+            Main:TweenSizeAndPosition(UDim2.new(0, 480, 0, 320), UDim2.new(0.5, -240, 0.5, -160), "Out", "Quad", 0.3, true) -- restaura a janela
+        else
+            Main:TweenSizeAndPosition(UDim2.new(0, 0, 0, 0), UDim2.new(0.5, 0, 0.5, 0), "Out", "Quad", 0.3, true) -- minimiza a janela
+        end
+    end)
 
 
     MainSide.Name = "MainSide"
