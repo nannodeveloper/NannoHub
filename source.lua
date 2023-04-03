@@ -292,6 +292,35 @@ function Kavo.CreateLib(kavName, themeList)
         ScreenGui:Destroy()
     end)
 
+    -- Criar o botão de minimizar
+local minimize = Instance.new("ImageButton")
+minimize.Name = "minimize"
+minimize.Parent = MainHeader
+minimize.BackgroundTransparency = 1
+minimize.Position = UDim2.new(0.9, 0, 0, 0)
+minimize.Size = UDim2.new(0, 24, 0, 24)
+minimize.Image = "https://tinypic.host/images/2023/02/14/8666364_orcid_icon.png" -- Substitua isso pelo URL da imagem que você deseja usar para o botão de minimizar
+
+-- Adicionar o tratamento de evento ao botão de minimizar
+local isMinimized = false
+minimize.MouseButton1Click:Connect(function()
+    isMinimized = not isMinimized
+    if isMinimized then
+        -- Minimizar a janela
+        game.TweenService:Create(Main, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+            Size = UDim2.new(0, 0, 0, 0),
+            Position = UDim2.new(0.5, 0, 0.5, 0)
+        }):Play()
+    else
+        -- Restaurar a janela
+        game.TweenService:Create(Main, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+            Size = UDim2.new(0.5, 0, 0.5, 0),
+            Position = UDim2.new(0.25, 0, 0.25, 0)
+        }):Play()
+    end
+end)
+
+
     MainSide.Name = "MainSide"
     MainSide.Parent = Main
     MainSide.BackgroundColor3 = themeList.Header
@@ -574,23 +603,6 @@ function Kavo.CreateLib(kavName, themeList)
                 updateSectionFrame()
                 UpdateSize()
             local Elements = {}
-
--- Adicione este código logo após a linha que define a variável "elements"
-local minimizeButton = Library:Create("ImageButton", {
-    Image = "rbxassetid://3926307971",
-    ImageColor3 = Color3.new(1, 1, 1),
-    ScaleType = Enum.ScaleType.Fit,
-    Size = UDim2.new(0, 30, 0, 30),
-    Position = UDim2.new(0, 10, 0, 10),
-    Parent = main,
-    Name = "MinimizeButton"
-})
-
-minimizeButton.MouseButton1Click:Connect(function()
-    main.Visible = false
-end)
-
-
             function Elements:NewButton(bname,tipINf, callback)
                 showLogo = showLogo or true
                 local ButtonFunction = {}
