@@ -293,21 +293,34 @@ function Kavo.CreateLib(kavName, themeList)
         ScreenGui:Destroy()
     end)
 
-    -- Criar o botão de minimizar
-    minimize.Name = "minimize"
-    minimize.Parent = MainHeader
-    minimize.BackgroundTransparency = 1.000
-    minimize.Position = UDim2.new(0.899, 0, 0.14, 0)
-    minimize.Size = UDim2.new(0, 21, 0, 21)
-    minimize.ZIndex = 2
-    minimize.Image = "https://tinypic.host/images/2023/02/14/8666364_orcid_icon.png"
-    minimize.MouseButton1Click:Connect(function()
-        if Main.Size == UDim2.new(0, 0, 0, 0) then -- verifica se a janela está minimizada
-            Main:TweenSizeAndPosition(UDim2.new(0, 480, 0, 320), UDim2.new(0.5, -240, 0.5, -160), "Out", "Quad", 0.3, true) -- restaura a janela
-        else
-            Main:TweenSizeAndPosition(UDim2.new(0, 0, 0, 0), UDim2.new(0.5, 0, 0.5, 0), "Out", "Quad", 0.3, true) -- minimiza a janela
-        end
-    end)
+
+minimize.Name = "minimize"
+minimize.Parent = MainHeader
+minimize.BackgroundTransparency = 1.000
+minimize.Position = UDim2.new(0.9, 0, 0.13, 0)
+minimize.Size = UDim2.new(0, 20, 0, 20)
+minimize.ZIndex = 2
+minimize.Image = "https://i.imgur.com/0lvfX9h.png" -- imagem do botão de minimizar
+minimize.ImageRectOffset = Vector2.new(0, 0)
+minimize.ImageRectSize = Vector2.new(512, 512)
+
+-- adiciona a funcionalidade de minimizar ao botão
+local isMinimized = false
+minimize.MouseButton1Click:Connect(function()
+    if not isMinimized then
+        isMinimized = true
+        game.TweenService:Create(Main, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+            Position = UDim2.new(1, -35, 1, -35) -- move o UI para fora da tela
+        }):Play()
+        minimize.Image = "https://i.imgur.com/hkblXXi.jpeg" -- muda a imagem do botão para maximizar
+    else
+        isMinimized = false
+        game.TweenService:Create(Main, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+            Position = UDim2.new(0.5, -225, 0.5, -150) -- move o UI de volta para a posição original
+        }):Play()
+        minimize.Image = "https://i.imgur.com/MIjC9zW.jpeg" -- muda a imagem do botão para minimizar
+    end
+end)
 
 
     MainSide.Name = "MainSide"
